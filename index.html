@@ -75,8 +75,7 @@
         errorDiv.textContent = "";  // Clear error if validation passes
       }
 
-      // Submit data to Google Sheets via CORS Anywhere proxy and Google Apps Script
-      const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';  // CORS Anywhere proxy
+    
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbzf0LAtH4AdosZ7Eac8dAxUIFdBLjJv1UGUpz5yBLqI7c-zK6ro0qdSwImVIkltHeiQqQ/exec';
 
       fetch(corsAnywhereUrl + scriptUrl, {
