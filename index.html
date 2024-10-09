@@ -75,27 +75,27 @@
         errorDiv.textContent = "";  // Clear error if validation passes
       }
 
-    
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbwfFm_HKb0_fxR7e56NiL0dv512h-P40ClZzAn17UpzIQnhDi9AfDszmbiWO95u2tqgZw/exec';
 
       fetch(scriptUrl, {
-    redirect: "follow",
-    method: 'POST',
-    mode: 'no-cors',  // no-cors limits access to the response body
-    body: JSON.stringify({ brand, url }),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  .then(() => {
-    // Since 'no-cors' mode doesn't allow you to access the response, just assume success
-    alert('Submission successful!');
-    document.getElementById('submissionForm').reset();
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Error submitting form.');
-  });
+        redirect: "follow",
+        method: 'POST',
+        mode: 'no-cors',  // no-cors limits access to the response body
+        body: JSON.stringify({ brand, url }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(() => {
+        // Since 'no-cors' mode doesn't allow you to access the response, just assume success
+        alert('Submission successful!');
+        document.getElementById('submissionForm').reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error submitting form.');
+      });
+    });
   </script>
 
 </body>
