@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Brand and File Share Link</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      margin: 50px auto;
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    input[type="text"], input[type="url"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .error {
+      color: red;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="submissionForm">
+    <label for="brand">Brand Name</label>
+    <input type="text" id="brand" name="brand" required>
+
+    <label for="url">File Share Link</label>
+    <input type="url" id="url" name="url" required>
+
+    <div id="error" class="error"></div>
+
+    <button type="submit" id="submitBtn">Submit</button>
+  </form>
+
+  <script>
+    document.getElementById('submissionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const brand = document.getElementById('brand').value;
+      const url = document.getElementById('url').value;
+      const errorDiv = document.getElementById('error');
+      
+      // URL validation for Google Drive, Dropbox, SharePoint
+      const validDomains = ['drive.google.com', 'dropbox.com', 'sharepoint.com'];
+      const urlDomain = (new URL(url)).hostname;
+
+      if (!validDomains.some(domain => urlDomain.includes(domain))) {
+        errorDiv.textContent = "Invalid URL. Please use Google Drive, Dropbox, or SharePoint.";
+        return;
+      } else {
+        errorDiv.textContent = "";  // Clear error if validation passes
+      }
+
+      // Submit data to Google Sheets via Google Apps Script
+      fetch('https://script.google.com/macros/s/AKfycbzf0LAtH4AdosZ7Eac8dAxUIFdBLjJv1UGUpz5yBLqI7c-zK6ro0qdSwImVIkltHeiQqQ/exec', {
+        method: 'POST',
+        body: JSON.stringify({ brand, url }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Submission successful!');
+          document.getElementById('submissionForm').reset();
+        } else {
+          alert('There was an error. Please try again.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error submitting form.');
+      });
+    });
+  </script>
+
+</body>
+</html>
