@@ -78,7 +78,8 @@
     
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbzf0LAtH4AdosZ7Eac8dAxUIFdBLjJv1UGUpz5yBLqI7c-zK6ro0qdSwImVIkltHeiQqQ/exec';
 
-      fetch(corsAnywhereUrl + scriptUrl, {
+      fetch(scriptUrl, {
+        redirect: "follow",
         method: 'POST',
         body: JSON.stringify({ brand, url }),
         headers: {
