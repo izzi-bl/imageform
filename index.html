@@ -124,24 +124,25 @@
 
       const scriptUrl = 'https://script.google.com/macros/s/AKfycbwfFm_HKb0_fxR7e56NiL0dv512h-P40ClZzAn17UpzIQnhDi9AfDszmbiWO95u2tqgZw/exec';
 
-fetch(scriptUrl, {
-  method: 'POST',
-  mode: 'no-cors',  // No CORS mode means you can't access the response
-  body: JSON.stringify({ brand, url }),
-  headers: {
-    'Content-Type': 'application/json'
-  }
-})
-.then(() => {
-  // Since 'no-cors' doesn't allow access to the response, just assume success
-  successDiv.textContent = "Submission successful!";
-  successDiv.style.display = 'block';
-  document.getElementById('submissionForm').reset();
-})
-.catch(error => {
-  console.error('Error:', error);
-  errorDiv.textContent = "Error submitting form.";
-});
+      fetch(scriptUrl, {
+        method: 'POST',
+        mode: 'no-cors',  // No CORS mode means you can't access the response
+        body: JSON.stringify({ brand, url }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(() => {
+        // Since 'no-cors' doesn't allow access to the response, just assume success
+        successDiv.textContent = "Submission successful!";
+        successDiv.style.display = 'block';
+        document.getElementById('submissionForm').reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        errorDiv.textContent = "Error submitting form.";
+      });
+    });
   </script>
 
 </body>
