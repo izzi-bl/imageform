@@ -126,7 +126,7 @@
 
       fetch(scriptUrl, {
         method: 'POST',
-        mode: 'cors',  // This enables CORS (Cross-Origin Resource Sharing)
+        mode: 'no-cors',  // This enables CORS (Cross-Origin Resource Sharing)
         body: JSON.stringify({ brand, url }),
         headers: {
           'Content-Type': 'application/json'
