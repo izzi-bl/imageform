@@ -126,6 +126,10 @@
 
       fetch(scriptUrl, {
         method: 'POST',
+        cors: {
+          origin: [‘https://izzi-bl.github.io’, ‘http://localhost:5000’],
+          methods: ‘GET,HEAD,PUT,PATCH,DELETE’,
+          },
         body: JSON.stringify({ brand, url }),
         headers: {
           'Content-Type': 'application/json'
